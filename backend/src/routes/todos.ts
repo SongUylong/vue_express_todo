@@ -52,7 +52,7 @@ router.patch("/:id", async (req: Request, res: Response) => {
 router.delete("/:id", async (req: Request, res: Response) => {
   const { id } = req.params;
   try {
-    const [result] = await db.execute("DELETE FROM todos WHERE id = ?");
+    const [result] = await db.execute("DELETE FROM todos WHERE id = ?", [id]);
     const { affectedRows } = result as any;
     if (affectedRows === 0) {
       return res.status(404).json({ error: "Todo not found" });
